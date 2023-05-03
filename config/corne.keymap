@@ -55,7 +55,7 @@
                 tri_layer {
                         bindings = <
    &trans    &trans       &trans       &trans       &trans       &trans         &trans  &trans   &trans &trans    &trans &trans
-   &trans &trans &trans &trans &kp LALT &trans &kp LC(LSHFT(LALT)) &kp TAB &trans &trans &trans &trans
+   &trans &trans &trans &trans &kp LALT &trans &trans &kp TAB &trans &trans &trans &trans
    &trans  &trans       &trans       &trans       &trans       &trans         &trans   &trans   &trans &trans    &trans &trans
                                     &trans     &trans       &trans      &trans  &trans   &trans
                         >;
