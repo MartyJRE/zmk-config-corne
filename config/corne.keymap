@@ -9,6 +9,9 @@
 #include <dt-bindings/zmk/bt.h>
 
 / {
+        &mt {
+                tapping-term-ms = <200>;
+        };
         keymap {
                 compatible = "zmk,keymap";
 
