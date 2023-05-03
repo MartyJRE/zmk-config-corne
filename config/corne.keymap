@@ -27,7 +27,7 @@
 
                 default_layer {
                         bindings = <
-   &kp DEL   &kp Q &mt RC(W) W &kp E &kp R &mt RC(T) T   &kp Y &kp U  &kp I     &kp O   &kp P    &kp BSLH
+   &kp DEL   &kp Q &mt RC(W) W &kp E &mt RC(R) R &mt RC(T) T   &kp Y &kp U  &kp I     &kp O   &kp P    &kp BSLH
    &mt LCTRL ESC   &mt RC(A) A &mt RC(S) S &mt LBKT D &mt LPAR F &mt LBRC G   &mt RBRC H &mt RPAR J  &mt RBKT K     &kp L   &kp SEMI &kp SQT
    &kp LSHFT &mt RC(Z) Z &mt RC(X) X &mt RC(C) C &mt RC(V) V &mt RC(B) B &mt LGUI N &mt LC(M) M &kp COMMA &kp DOT &mt LC(FSLH) FSLH &kp RSHFT
                    &mo 1 &kp SPACE &kp BSPC   &kp RCTRL &mt RSHFT RET &mo 2
