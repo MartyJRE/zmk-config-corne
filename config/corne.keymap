@@ -32,7 +32,7 @@
    &mt LC(M) M  
    &kp COMMA 
    &kp DOT 
-   &mt LC(FLSH) FSLH 
+   &mt LC(FSLH) FSLH 
    &kp RSHFT
                   &kp SPACE &kp BSPC &mo 1   &mo 2 &kp RCTRL &mt RSHFT RET
                         >;
