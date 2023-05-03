@@ -14,7 +14,14 @@
 };
 
 / {
-
+        conditional_layers = {
+                compatible = "zmk,conditional-layers";
+                tri_layer {
+                        if-layers = <1 2>;
+                        then-layer = <3>;
+                };
+        };
+        
         keymap {
                 compatible = "zmk,keymap";
 
@@ -39,6 +46,15 @@
                         bindings = <
    &trans  &kp EXCL &kp AT &kp HASH &kp DLLR &kp PRCNT   &kp CARET &kp AMPS  &kp KP_MULTIPLY &kp LPAR &kp RPAR &trans
    &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4  &trans &trans &trans &trans &trans &trans
+   &trans  &trans       &trans       &trans       &trans       &trans         &trans   &trans   &trans &trans    &trans &trans
+                                    &trans     &trans       &trans      &trans  &trans   &trans
+                        >;
+                };
+                
+                tri_layer {
+                        bindings = <
+   &trans    &trans       &trans       &trans       &trans       &trans         &trans  &trans   &trans &trans    &trans &trans
+   &trans &trans &trans &trans &kp LALT &trans &kp MEH &kp TAB &trans &trans &trans &trans
    &trans  &trans       &trans       &trans       &trans       &trans         &trans   &trans   &trans &trans    &trans &trans
                                     &trans     &trans       &trans      &trans  &trans   &trans
                         >;
