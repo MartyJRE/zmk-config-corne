@@ -7,6 +7,14 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/ext_power.h>
+
+#define BASE 0
+#define NUMBERS 1
+#define SYMBOLS 2
+#define SYSTEM 3
+
+#define MEH LA(LC(LSHIFT))
 
 &mt {
         tapping-term-ms = <200>;
@@ -17,8 +25,8 @@
         conditional_layers {
                 compatible = "zmk,conditional-layers";
                 tri_layer {
-                        if-layers = <1 2>;
-                        then-layer = <3>;
+                        if-layers = <NUMBERS SYMBOLS>;
+                        then-layer = <SYSTEM>;
                 };
         };
         
@@ -26,8 +34,9 @@
                 compatible = "zmk,keymap";
 
                 default_layer {
+                        label = "Base";
                         bindings = <
-                                &kp DEL       &kp Q       &mt RC(W) W &kp E       &mt RC(R) R &mt RC(T) T &kp Y         &kp U         &kp I      &kp O   &kp P             &kp BSLH
+                                &kp DEL       &kp Q       &mt RC(W) W &kp E       &mt RC(R) R &mt RC(T) T &mt MEH Y     &kp U         &kp I      &kp O   &kp P             &kp BSLH
                                 &mt LCTRL ESC &mt RC(A) A &mt RC(S) S &mt LBKT D  &mt LPAR F  &mt LBRC G  &mt RBRC H    &mt RPAR J    &mt RBKT K &kp L   &kp SEMI          &kp SQT
                                 &kp LSHFT     &mt RC(Z) Z &mt RC(X) X &mt RC(C) C &mt RC(V) V &mt RC(B) B &mt LGUI N    &mt LC(M) M   &kp COMMA  &kp DOT &mt LC(FSLH) FSLH &kp RSHFT
                                                                       &mo 1       &kp SPACE   &kp BSPC    &mt RCTRL TAB &mt RSHFT RET &mo 2
@@ -35,6 +44,7 @@
                 };
                 
                 lower_layer {
+                        label = "Numbers";
                         bindings = <
                                 &trans &kp N1 &kp N2 &kp N3    &kp N4    &kp N5 &kp N6 &kp N7    &kp N8   &kp N9    &kp N0 &trans
                                 &trans &trans &trans &kp GRAVE &kp EQUAL &trans &trans &kp MINUS &kp UP   &trans    &trans &trans
@@ -44,20 +54,22 @@
                 };
 
                 raise_layer {
+                        label = "Symbols";
                         bindings = <
-                                &trans     &kp EXCL     &kp AT       &kp HASH     &kp DLLR     &kp PRCNT     &kp CARET &kp AMPS  &kp KP_MULTIPLY &kp LPAR &kp RPAR &trans
-                                &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4  &trans    &trans    &trans          &trans   &trans   &trans
-                                &trans     &trans       &trans       &trans       &trans       &trans        &trans    &trans    &trans          &trans   &trans   &trans
-                                                                     &trans       &trans       &trans        &trans    &trans    &trans
+                                &trans &kp EXCL &kp AT &kp HASH &kp DLLR &kp PRCNT &kp CARET &kp AMPS  &kp KP_MULTIPLY &kp LPAR &kp RPAR &trans
+                                &trans &trans   &trans &trans   &trans   &trans    &trans    &trans    &trans          &trans   &trans   &trans
+                                &trans &trans   &trans &trans   &trans   &trans    &trans    &trans    &trans          &trans   &trans   &trans
+                                                       &trans   &trans   &trans    &trans    &trans    &trans
                         >;
                 };
                 
                 tri_layer {
+                        label = "System"
                         bindings = <
-                                &trans &trans &trans &trans &trans   &trans &trans &trans  &trans &trans &trans &trans
-                                &trans &trans &trans &trans &kp LALT &trans &trans &kp TAB &trans &trans &trans &trans
-                                &trans &trans &trans &trans &trans   &trans &trans &trans  &trans &trans &trans &trans
-                                                     &trans &trans   &trans &trans &trans  &trans
+                                &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4 &trans  &trans  &trans  &trans &trans &trans
+                                &trans     &trans       &trans       &trans       &kp LALT     &trans       &trans  &kp TAB &trans  &trans &trans &trans
+                                &trans     &trans       &trans       &trans       &trans       &trans       &trans  &trans  &trans  &trans &trans &trans
+                                                                     &trans       &trans       &trans       &trans  &trans  &trans
                         >;
                 };
         };
