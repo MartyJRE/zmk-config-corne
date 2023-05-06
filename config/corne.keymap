@@ -8,11 +8,13 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
 
+// Layers
 #define BASE 0
 #define NUMBERS 1
 #define SYMBOLS 2
 #define SYSTEM 3
 
+// Meh = Ctrl + Shift + Alt
 #define MEH LA(LC(LSHIFT))
 
 &mt {
@@ -24,6 +26,7 @@
         conditional_layers {
                 compatible = "zmk,conditional-layers";
                 tri_layer {
+                        // Switch to system layer if both layer switch keys are pressed at the same time
                         if-layers = <NUMBERS SYMBOLS>;
                         then-layer = <SYSTEM>;
                 };
