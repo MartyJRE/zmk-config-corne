@@ -23,6 +23,15 @@
 };
 
 / {
+        behaviors {
+            td0: tap_dance_0 {
+                compatible = "zmk,behavior-tap-dance";
+                label = "TAP_DANCE_0";
+                #binding-cells = <0>;
+                tapping-term-ms = <200>;
+                bindings = <&mt RC(B) B>, <&kp LA(LC(B))>;
+            };
+        };
         conditional_layers {
                 compatible = "zmk,conditional-layers";
                 tri_layer {
