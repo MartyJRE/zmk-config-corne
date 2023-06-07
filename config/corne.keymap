@@ -13,6 +13,7 @@
 #define NUMBERS 1
 #define SYMBOLS 2
 #define SYSTEM 3
+#define LOCK 4
 
 // Meh = Ctrl + Shift + Alt
 #define MEH LA(LC(LSHIFT))
@@ -41,42 +42,117 @@
                 compatible = "zmk,keymap";
 
                 default_layer {
-                        label = "Base";
+                        label = "BASE";
                         bindings = <
-                                &kp DEL       &kp Q       &mt RC(W) W &kp E       &mt RC(R) R &mt RC(T) T &mt MEH Y     &kp U         &kp I      &kp O   &kp P             &kp BSLH
-                                &mt LCTRL ESC &mt RC(A) A &mt RC(S) S &mt LBKT D  &mt LPAR F  &mt LBRC G  &mt RBRC H    &mt RPAR J    &mt RBKT K &kp L   &kp SEMI          &kp SQT
-                                &kp LSHFT     &mt RC(Z) Z &mt RC(X) X &mt RC(C) C &mt RC(V) V &mt RC(B) B &mt LGUI N    &mt LC(M) M   &kp COMMA  &kp DOT &mt LC(FSLH) FSLH &kp RSHFT
-                                                                      &mo 1       &kp SPACE   &kp BSPC    &mt RCTRL TAB &mt RSHFT RET &mo 2
+                        //    ---------------------------------------------------------------------------    -----------------------------------------------------------------------------
+                        //    | Delete      | Q          | W/Ctrl W | E         | R/Ctrl R  | T/Ctrl T  |    | Y/Crl At Sh | U           | I        | O     | P               | \         |
+                                &kp DEL       &kp Q       &mt RC(W) W &kp E       &mt RC(R) R &mt RC(T) T      &mt MEH Y     &kp U         &kp I      &kp O   &kp P             &kp BSLH
+                        //    |             |            |          |           |           |           |    |             |             |          |       |                 |           |
+                        //    ---------------------------------------------------------------------------    -----------------------------------------------------------------------------
+                        //    | Esc/Ctrl    | A/Ctrl A   | S/Ctrl S | D/[       | F/(       | G/{       |    | H/}         | J/)         | K/]      | L     | ;               | '         |
+                                &mt LCTRL ESC &mt RC(A) A &mt RC(S) S &mt LBKT D  &mt LPAR F  &mt LBRC G     | &mt RBRC H    &mt RPAR J    &mt RBKT K &kp L   &kp SEMI          &kp SQT
+                        //    |             |            |          |           |           |           |    |             |             |          |       |                 |           |
+                        //    ---------------------------------------------------------------------------    ------------------------------------------------------------------------------
+                        //    | Shift       | Z/Ctrl Z   | X/Ctrl X | C/Ctrl C  | V/Ctrl V  | B/Ctrl B  |    | N/Super     | M/Ctrl M    | ,        | .     | "/"/Ctrl "/"    | Shift     |
+                                &kp LSHFT     &mt RC(Z) Z &mt RC(X) X &mt RC(C) C &mt RC(V) V &mt RC(B) B      &mt LGUI N    &mt LC(M) M   &kp COMMA  &kp DOT &mt LC(FSLH) FSLH &kp RSHFT
+                        //    |             |            |          |           |           |           |    |             |             |          |       |                 |           |
+                        //    ---------------------------------------------------------------------------    ------------------------------------------------------------------------------
+                        //                                          | Numbers   | Space     | Backspace |    | Tab/Ctrl    | Enter/Shift | Symbols  |
+                                                                      &mo 1       &kp SPACE   &kp BSPC         &mt RCTRL TAB &mt RSHFT RET &mo 2
+                        //                                          |           |           |           |    |             |             |          |
+                        //                                          -------------------------------------    ----------------------------------------
                         >;
                 };
                 
                 lower_layer {
-                        label = "Numbers";
+                        label = "NUM";
                         bindings = <
-                                &trans &kp N1 &kp N2 &kp N3    &kp N4    &kp N5        &kp N6 &kp N7    &kp N8   &kp N9    &kp N0 &trans
-                                &trans &trans &trans &kp GRAVE &kp EQUAL &trans        &trans &kp MINUS &kp UP   &trans    &trans &trans
-                                &trans &trans &trans &trans    &trans    &kp LA(LC(B)) &trans &kp LEFT  &kp DOWN &kp RIGHT &trans &trans
-                                                     &trans    &trans    &trans        &trans &trans    &trans
+                        //    --------------------------------------------------------    -----------------------------------------------------
+                        //    |      | 1    | 2    | 3       | 4       | 5           |    | 6    | 7       | 8      | 9       | 0    |        |
+                                &trans &kp N1 &kp N2 &kp N3    &kp N4    &kp N5             &kp N6 &kp N7    &kp N8   &kp N9    &kp N0 &trans
+                        //    |      |      |      |         |         |             |    |      |         |        |         |      |        |
+                        //    --------------------------------------------------------    -----------------------------------------------------
+                        //    |      |      |      | `       | =       |             |    |      | -       | ↑      |         |      |        |
+                                &trans &trans &trans &kp GRAVE &kp EQUAL &trans             &trans &kp MINUS &kp UP   &trans    &trans &trans
+                        //    |      |      |      |         |         |             |    |      |         |        |         |      |        |
+                        //    --------------------------------------------------------    -----------------------------------------------------
+                        //    |      |      |      |         |         | Ctrl Alt B  |    |      | ←       | ↓      | →       |      |        |
+                                &trans &trans &trans &trans    &trans    &kp LA(LC(B))      &trans &kp LEFT  &kp DOWN &kp RIGHT &trans &trans
+                        //    |      |      |      |         |         |             |    |      |         |        |         |      |        |
+                        //    --------------------------------------------------------    -----------------------------------------------------
+                        //                         |         |         |             |    |      |         |        |
+                                                     &trans    &trans    &trans             &trans &trans    &trans
+                        //                         |         |         |             |    |      |         |        |
+                        //                         -----------------------------------    ---------------------------
                         >;
                 };
 
                 raise_layer {
-                        label = "Symbols";
+                        label = "SYM";
                         bindings = <
-                                &trans &kp EXCL &kp AT &kp HASH &kp DLLR &kp PRCNT &kp CARET &kp AMPS  &kp KP_MULTIPLY &kp LPAR &kp RPAR &trans
-                                &trans &trans   &trans &trans   &kp RGUI &trans    &trans    &mt MEH   &trans          &trans   &trans   &trans
-                                &trans &trans   &trans &trans   &trans   &trans    &trans    &trans    &trans          &trans   &trans   &trans
-                                                       &trans   &trans   &trans    &trans    &trans    &trans
+                        //    ----------------------------------------------------    ----------------------------------------------------------------
+                        //    |      | !      | @    | #      | $      | %       |    | ^       | &       | *             | (      | )      |        |
+                                &trans &kp EXCL &kp AT &kp HASH &kp DLLR &kp PRCNT      &kp CARET &kp AMPS  &kp KP_MULTIPLY &kp LPAR &kp RPAR &trans
+                        //    |      |        |      |        |        |         |    |         |         |               |        |        |        |
+                        //    ----------------------------------------------------    ----------------------------------------------------------------
+                        //    |      |        |      |        | Super  |         |    |         | Crl A S |               |        |        |        |
+                                &trans &trans   &trans &trans   &kp RGUI &trans         &trans    &mt MEH   &trans          &trans   &trans   &trans
+                        //    |      |        |      |        |        |         |    |         |         |               |        |        |        |
+                        //    ----------------------------------------------------    ----------------------------------------------------------------
+                        //    |      |        |      |        |        |         |    |         |         |               |        |        |        |
+                                &trans &trans   &trans &trans   &trans   &trans         &trans    &trans    &trans          &trans   &trans   &trans
+                        //    |      |        |      |        |        |         |    |         |         |               |        |        |        |
+                        //    ----------------------------------------------------    ----------------------------------------------------------------
+                        //                           |        |        |         |    |         |         |               |
+                                                       &trans   &trans   &trans         &trans    &trans    &trans
+                        //                           |        |        |         |    |         |         |               | 
+                        //                           -----------------------------    -------------------------------------
                         >;
                 };
                 
                 tri_layer {
-                        label = "System";
+                        label = "SYS";
                         bindings = <
-                                &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4 &trans  &trans  &trans  &trans &trans &trans
-                                &trans     &trans       &trans       &trans       &kp LALT     &trans       &trans  &kp TAB &trans  &trans &trans &trans
-                                &trans     &trans       &trans       &caps_word   &trans       &trans       &trans  &trans  &trans  &trans &trans &trans
-                                                                     &trans       &trans       &trans       &trans  &trans  &trans
+                        //    ----------------------------------------------------------------------------    ---------------------------------------------------
+                        //    | Clear BT | Profile 1  | Profile 2  | Profile 3  | Profile 4  | Profile 5 |    |       |       |       |      |      |           |
+                                &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4     &trans  &trans  &trans  &trans &trans &tog LOCK
+                        //    |          |            |            |            |            |           |    |       |       |       |      |      |           |
+                        //    ----------------------------------------------------------------------------    ---------------------------------------------------
+                        //    |          |            |            |            | Alt        |           |    |       | Tab   |       |      |      |           |
+                                &trans     &trans       &trans       &trans       &kp LALT     &trans           &trans  &kp TAB &trans  &trans &trans &trans
+                        //    |          |            |            |            |            |           |    |       |       |       |      |      |           |
+                        //    ----------------------------------------------------------------------------    ---------------------------------------------------
+                        //    |          |            |            | Caps Word  |            |           |    |       |       |       |      |      |           |
+                                &trans     &trans       &trans       &caps_word   &trans       &trans           &trans  &trans  &trans  &trans &trans &trans
+                        //    |          |            |            |            |            |           |    |       |       |       |      |      |           |
+                        //    ----------------------------------------------------------------------------    ---------------------------------------------------
+                        //                                         |            |            |           |    |       |       |       |
+                                                                     &trans       &trans       &trans           &trans  &trans  &trans
+                        //                                         |            |            |           |    |       |       |       |
+                        //                                         ---------------------------------------    -------------------------
+                        >;
+                };
+                
+                lock_layer {
+                        label = "LOCKED";
+                        bindings = <
+                        //    --------------------------------------    ----------------------------------------
+                        //    |      |     |    |      |     |     |    |     |     |      |     |     |       |
+                                &none &none &none &none  &none &none      &none &none &none  &none &none &none
+                        //    |      |     |    |      |     |     |    |     |     |      |     |     |       |
+                        //    --------------------------------------    ----------------------------------------
+                        //    |      |     |    |      |     |     |    |     |     |      |     |     |       |
+                                &none &none &none &none  &none &none      &none &none &none  &none &none &none
+                        //    |      |     |    |      |     |     |    |     |     |      |     |     |       |
+                        //    --------------------------------------    ----------------------------------------
+                        //    |      |     |    |      |     |     |    |     |     |      |     |     |       |
+                                &none &none &none &none  &none &none      &none &none &none  &none &none &none
+                        //    |      |     |    |      |     |     |    |     |     |      |     |     |       |
+                        //    --------------------------------------    ----------------------------------------
+                        //                      |      |     |     |    |     |     |      |
+                                                  &trans &none &none      &none &none &trans
+                        //                      |      |     |     |    |     |     |      |
+                        //                      --------------------    --------------------
                         >;
                 };
         };
