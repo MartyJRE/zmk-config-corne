@@ -1,32 +1,37 @@
-/*
- * Copyright (c) 2020 The ZMK Contributors
- *
- * SPDX-License-Identifier: MIT
- */
-
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
 
-// Layers
-#define BASE 0
-#define NUMBERS 1
-#define SYMBOLS 2
-#define SYSTEM 3
-#define LOCK 4
+#define BASE 0 // default_layer index
+#define NUMBERS 1 // lower_layer index
+#define SYMBOLS 2 // raise_layer index
+#define SYSTEM 3 // tri_layer index
+#define LOCK 4 // lock_layer index
 
 // Meh = Ctrl + Shift + Alt
 #define MEH LA(LC(LSHIFT))
 
 
 &caps_word {
+        // when using caps word, allow for undescore and minus as they are commonly used for constants in programming languages
         continue-list = <UNDERSCORE MINUS>;
 };
 
 &mt {
+        // sane defaults
         tapping-term-ms = <200>;
         flavor = "tap-preferred";
 };
+
+// Key index reference:
+
+// 00 01 02 03 04 05 | 06 07 08 09 10 11
+// 12 13 14 15 16 17 | 18 19 20 21 22 23
+// 24 25 26 27 28 29 | 30 31 32 33 34 35
+//          36 37 38 | 39 40 41
+
+#define LEFT_MOD 36 // left thumb layer modifier key index
+#define RIGHT_MOD 41 // right thumb layer modifier key index
 
 / {
         conditional_layers {
@@ -35,6 +40,17 @@
                         // Switch to system layer if both layer switch keys are pressed at the same time
                         if-layers = <NUMBERS SYMBOLS>;
                         then-layer = <SYSTEM>;
+                };
+        };
+        
+        combos {
+                compatible = "zmk,combos";
+                combo_unlock {
+                        // Switch to base layer if both layer switch keys are pressed at the same time in the Lock layer
+                        timeout-ms = <100>;
+                        key-positions = <LEFT_MOD RIGHT_MOD>;
+                        bindings = <&to BASE>;
+                        layers = <LOCKED>;
                 };
         };
         
@@ -58,7 +74,7 @@
                         //    |             |            |          |           |           |           |    |             |             |          |       |                 |           |
                         //    ---------------------------------------------------------------------------    ------------------------------------------------------------------------------
                         //                                          | Numbers   | Space     | Backspace |    | Tab/Ctrl    | Enter/Shift | Symbols  |
-                                                                      &mo 1       &kp SPACE   &kp BSPC         &mt RCTRL TAB &mt RSHFT RET &mo 2
+                                                                      &mo NUMBERS &kp SPACE   &kp BSPC         &mt RCTRL TAB &mt RSHFT RET &mo SYMBOLS
                         //                                          |           |           |           |    |             |             |          |
                         //                                          -------------------------------------    ----------------------------------------
                         >;
@@ -113,19 +129,19 @@
                 tri_layer {
                         label = "SYS";
                         bindings = <
-                        //    ----------------------------------------------------------------------------    ---------------------------------------------------
-                        //    | Clear BT | Profile 1  | Profile 2  | Profile 3  | Profile 4  | Profile 5 |    |       |       |       |      |      |           |
-                                &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4     &trans  &trans  &trans  &trans &trans &tog LOCK
-                        //    |          |            |            |            |            |           |    |       |       |       |      |      |           |
-                        //    ----------------------------------------------------------------------------    ---------------------------------------------------
-                        //    |          |            |            |            | Alt        |           |    |       | Tab   |       |      |      |           |
+                        //    ----------------------------------------------------------------------------    --------------------------------------------------
+                        //    | Clear BT | Profile 1  | Profile 2  | Profile 3  | Profile 4  | Profile 5 |    |       |       |       |      |      | Lock     |
+                                &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4     &trans  &trans  &trans  &trans &trans &to LOCK
+                        //    |          |            |            |            |            |           |    |       |       |       |      |      |          |
+                        //    ----------------------------------------------------------------------------    --------------------------------------------------
+                        //    |          |            |            |            | Alt        |           |    |       | Tab   |       |      |      |          |
                                 &trans     &trans       &trans       &trans       &kp LALT     &trans           &trans  &kp TAB &trans  &trans &trans &trans
-                        //    |          |            |            |            |            |           |    |       |       |       |      |      |           |
-                        //    ----------------------------------------------------------------------------    ---------------------------------------------------
-                        //    |          |            |            | Caps Word  |            |           |    |       |       |       |      |      |           |
+                        //    |          |            |            |            |            |           |    |       |       |       |      |      |          |
+                        //    ----------------------------------------------------------------------------    --------------------------------------------------
+                        //    |          |            |            | Caps Word  |            |           |    |       |       |       |      |      |          |
                                 &trans     &trans       &trans       &caps_word   &trans       &trans           &trans  &trans  &trans  &trans &trans &trans
-                        //    |          |            |            |            |            |           |    |       |       |       |      |      |           |
-                        //    ----------------------------------------------------------------------------    ---------------------------------------------------
+                        //    |          |            |            |            |            |           |    |       |       |       |      |      |          |
+                        //    ----------------------------------------------------------------------------    --------------------------------------------------
                         //                                         |            |            |           |    |       |       |       |
                                                                      &trans       &trans       &trans           &trans  &trans  &trans
                         //                                         |            |            |           |    |       |       |       |
@@ -150,7 +166,7 @@
                         //    |      |     |    |      |     |     |    |     |     |      |     |     |       |
                         //    --------------------------------------    ----------------------------------------
                         //                      |      |     |     |    |     |     |      |
-                                                  &trans &none &none      &none &none &trans
+                                                  &none  &none &none      &none &none &none
                         //                      |      |     |     |    |     |     |      |
                         //                      --------------------    --------------------
                         >;
