@@ -50,7 +50,7 @@
                         //    |             |            |          |           |           |           |    |             |             |          |       |                 |           |
                         //    ---------------------------------------------------------------------------    -----------------------------------------------------------------------------
                         //    | Esc/Ctrl    | A/Ctrl A   | S/Ctrl S | D/[       | F/(       | G/{       |    | H/}         | J/)         | K/]      | L     | ;               | '         |
-                                &mt LCTRL ESC &mt RC(A) A &mt RC(S) S &mt LBKT D  &mt LPAR F  &mt LBRC G     | &mt RBRC H    &mt RPAR J    &mt RBKT K &kp L   &kp SEMI          &kp SQT
+                                &mt LCTRL ESC &mt RC(A) A &mt RC(S) S &mt LBKT D  &mt LPAR F  &mt LBRC G       &mt RBRC H    &mt RPAR J    &mt RBKT K &kp L   &kp SEMI          &kp SQT
                         //    |             |            |          |           |           |           |    |             |             |          |       |                 |           |
                         //    ---------------------------------------------------------------------------    ------------------------------------------------------------------------------
                         //    | Shift       | Z/Ctrl Z   | X/Ctrl X | C/Ctrl C  | V/Ctrl V  | B/Ctrl B  |    | N/Super     | M/Ctrl M    | ,        | .     | "/"/Ctrl "/"    | Shift     |
