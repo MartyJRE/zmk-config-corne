@@ -50,7 +50,7 @@
                         timeout-ms = <100>;
                         key-positions = <LEFT_MOD RIGHT_MOD>;
                         bindings = <&to BASE>;
-                        layers = <LOCKED>;
+                        layers = <LOCK>;
                 };
         };
         
