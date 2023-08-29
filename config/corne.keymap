@@ -10,7 +10,6 @@
 
 // Meh = Ctrl + Shift + Alt
 #define MEH LA(LC(LSHIFT))
-#define HUH LA(LC)
 
 
 &caps_word {
@@ -135,8 +134,8 @@
                                 &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4     &trans          &trans  &trans  &trans &trans &to LOCK
                         //    |          |            |            |            |            |           |    |                |       |       |      |      |          |
                         //    ----------------------------------------------------------------------------    -----------------------------------------------------------
-                        //    |          |            |            |            | Alt        |           |    |                | Tab   |       |      |      |          |
-                                &trans     &trans       &trans       &trans       &kp LALT     &kp HUH(LEFT)    &kp HUH(RIGHT)  &kp TAB &trans  &trans &trans &trans
+                        //    |          |            |            |            | Alt        |Back       |    | Forth          | Tab   |       |      |      |          |
+                                &trans     &trans       &trans       &trans       &kp LALT    &kp LA(LC(LEFT)) &kp LA(LC(RIGHT))  &kp TAB &trans  &trans &trans &trans
                         //    |          |            |            |            |            |           |    |                |       |       |      |      |          |
                         //    ----------------------------------------------------------------------------    -----------------------------------------------------------
                         //    |          |            |            | Caps Word  |            |           |    |                |       |       |      |      |          |
