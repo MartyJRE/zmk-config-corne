@@ -42,17 +42,6 @@
                 };
         };
         
-        combos {
-                compatible = "zmk,combos";
-                combo_unlock {
-                        // Switch to base layer if both layer switch keys are pressed at the same time in the Lock layer
-                        timeout-ms = <100>;
-                        key-positions = <LEFT_MOD RIGHT_MOD>;
-                        bindings = <&to BASE>;
-                        layers = <LOCK>;
-                };
-        };
-        
         keymap {
                 compatible = "zmk,keymap";
 
