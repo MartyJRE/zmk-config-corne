@@ -6,7 +6,6 @@
 #define NUMBERS 1 // lower_layer index
 #define SYMBOLS 2 // raise_layer index
 #define SYSTEM 3 // tri_layer index
-#define LOCK 4 // lock_layer index
 
 // Meh = Ctrl + Shift + Alt
 #define MEH LA(LC(LSHIFT))
@@ -14,7 +13,7 @@
 
 &caps_word {
         // when using caps word, allow for undescore and minus as they are commonly used for constants in programming languages
-        continue-list = <UNDERSCORE MINUS>;
+        continue-list = <DELETE BACKSPACE UNDERSCORE>;
 };
 
 &mt {
@@ -58,7 +57,7 @@
                 compatible = "zmk,keymap";
 
                 default_layer {
-                        label = "BASE";
+                        label = "Base";
                         bindings = <
                         //    ---------------------------------------------------------------------------    -----------------------------------------------------------------------------
                         //    | Delete      | Q          | W/Ctrl W | E         | R/Ctrl R  | T/Ctrl T  |    | Y/Crl At Sh | U           | I        | O     | P               | \         |
@@ -81,7 +80,7 @@
                 };
                 
                 lower_layer {
-                        label = "NUM";
+                        label = "Numbers";
                         bindings = <
                         //    --------------------------------------------------------    -----------------------------------------------------
                         //    |      | 1    | 2    | 3       | 4       | 5           |    | 6    | 7       | 8      | 9       | 0    |        |
@@ -104,7 +103,7 @@
                 };
 
                 raise_layer {
-                        label = "SYM";
+                        label = "Symbols";
                         bindings = <
                         //    ----------------------------------------------------    ----------------------------------------------------------------
                         //    |      | !      | @    | #      | $      | %       |    | ^       | &       | *             | (      | )      |        |
@@ -127,11 +126,11 @@
                 };
                 
                 tri_layer {
-                        label = "SYS";
+                        label = "System";
                         bindings = <
                         //    ----------------------------------------------------------------------------    -----------------------------------------------------------
-                        //    | Clear BT | Profile 1  | Profile 2  | Profile 3  | Profile 4  | Profile 5 |    |                |       |       |      |      | Lock     |
-                                &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4     &trans          &trans  &trans  &trans &trans &to LOCK
+                        //    | Clear BT | Profile 1  | Profile 2  | Profile 3  | Profile 4  | Profile 5 |    |                |       |       |      |      |          |
+                                &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4     &trans          &trans  &trans  &trans &trans &trans
                         //    |          |            |            |            |            |           |    |                |       |       |      |      |          |
                         //    ----------------------------------------------------------------------------    -----------------------------------------------------------
                         //    |          |            |            |            | Alt        |Back       |    | Forth          | Tab   |       |      |      |          |
@@ -146,29 +145,6 @@
                                                                      &trans       &trans       &trans           &trans          &trans  &trans
                         //                                         |            |            |           |    |                |       |       |
                         //                                         ---------------------------------------    ----------------------------------
-                        >;
-                };
-                
-                lock_layer {
-                        label = "LOCKED";
-                        bindings = <
-                        //    --------------------------------------    ----------------------------------------
-                        //    |      |     |    |      |     |     |    |     |     |      |     |     |       |
-                                &none &none &none &none  &none &none      &none &none &none  &none &none &none
-                        //    |      |     |    |      |     |     |    |     |     |      |     |     |       |
-                        //    --------------------------------------    ----------------------------------------
-                        //    |      |     |    |      |     |     |    |     |     |      |     |     |       |
-                                &none &none &none &none  &none &none      &none &none &none  &none &none &none
-                        //    |      |     |    |      |     |     |    |     |     |      |     |     |       |
-                        //    --------------------------------------    ----------------------------------------
-                        //    |      |     |    |      |     |     |    |     |     |      |     |     |       |
-                                &none &none &none &none  &none &none      &none &none &none  &none &none &none
-                        //    |      |     |    |      |     |     |    |     |     |      |     |     |       |
-                        //    --------------------------------------    ----------------------------------------
-                        //                      |      |     |     |    |     |     |      |
-                                                  &none  &none &none      &none &none &none
-                        //                      |      |     |     |    |     |     |      |
-                        //                      --------------------    --------------------
                         >;
                 };
         };
