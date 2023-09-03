@@ -13,7 +13,7 @@
 
 &caps_word {
         // when using caps word, allow for undescore and minus as they are commonly used for constants in programming languages
-        continue-list = <DELETE BACKSPACE UNDERSCORE>;
+        continue-list = <DELETE BACKSPACE UNDERSCORE LEFT RIGHT LCTRL RCTRL>;
 };
 
 &mt {
