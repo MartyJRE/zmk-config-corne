@@ -9,6 +9,12 @@
 
 // Meh = Ctrl + Shift + Alt
 #define MEH LA(LC(LSHIFT))
+// Import = Alt + Shift + Enter
+#define IMP LA(LS(ENTER))
+// Back = Alt + Control + <-
+#define BC LA(LC(LEFT))
+// Forward = Alt + Control + ->
+#define FW LA(LC(RIGHT))
 
 
 &caps_word {
@@ -46,7 +52,7 @@
                 compatible = "zmk,keymap";
 
                 default_layer {
-                        label = "Base";
+                        label = "α";
                         bindings = <
                         //    ---------------------------------------------------------------------------    -----------------------------------------------------------------------------
                         //    | Delete      | Q          | W/Ctrl W | E         | R/Ctrl R  | T/Ctrl T  |    | Y/Crl At Sh | U           | I        | O     | P               | \         |
@@ -69,7 +75,7 @@
                 };
 
                 lower_layer {
-                        label = "Numbers";
+                        label = "β";
                         bindings = <
                         //    --------------------------------------------------------    -----------------------------------------------------
                         //    |      | 1    | 2    | 3       | 4       | 5           |    | 6    | 7       | 8      | 9       | 0    |        |
@@ -92,7 +98,7 @@
                 };
 
                 raise_layer {
-                        label = "Symbols";
+                        label = "γ";
                         bindings = <
                         //    ----------------------------------------------------    ----------------------------------------------------------------
                         //    |      | !      | @    | #      | $      | %       |    | ^       | &       | *             | (      | )      |        |
@@ -115,19 +121,19 @@
                 };
 
                 tri_layer {
-                        label = "System";
+                        label = "δ";
                         bindings = <
                         //    ----------------------------------------------------------------------------    -----------------------------------------------------------
                         //    | Clear BT | Profile 1  | Profile 2  | Profile 3  | Profile 4  | Profile 5 |    |                |       |       |      |      |          |
-                                &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4     &trans          &trans  &trans  &trans &trans &trans
+                                &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4     &trans          &trans  &trans  &trans &trans  &trans
                         //    |          |            |            |            |            |           |    |                |       |       |      |      |          |
                         //    ----------------------------------------------------------------------------    -----------------------------------------------------------
                         //    |          |            |            |            | Alt        |Back       |    | Forth          | Tab   |       |      |      |          |
-                                &trans     &trans       &trans       &trans       &kp LALT    &kp LA(LC(LEFT)) &kp LA(LC(RIGHT))  &kp TAB &trans  &trans &trans &trans
+                                &trans     &trans       &trans       &trans       &kp LALT    &kp BC           &kp FW            &kp TAB &trans &trans &kp IMP &trans
                         //    |          |            |            |            |            |           |    |                |       |       |      |      |          |
                         //    ----------------------------------------------------------------------------    -----------------------------------------------------------
                         //    |          |            |            | Caps Word  |            |           |    |                |       |       |      |      |          |
-                                &trans     &trans       &trans       &caps_word   &trans       &trans           &trans          &trans  &trans  &trans &trans &trans
+                                &trans     &trans       &trans       &caps_word   &trans       &trans           &trans          &trans  &trans  &trans &trans  &trans
                         //    |          |            |            |            |            |           |    |                |       |       |      |      |          |
                         //    ----------------------------------------------------------------------------    -----------------------------------------------------------
                         //                                         |            |            |           |    |                |       |       |
