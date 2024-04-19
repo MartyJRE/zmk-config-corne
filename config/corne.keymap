@@ -69,8 +69,8 @@
                                 &kp LSHFT     &mt RG(Z) Z &mt RG(X) X &mt RG(C) C &mt RG(V) V &mt RG(B) B      &mt LGUI N    &mt LG(M) M   &kp COMMA  &kp DOT &mt LG(FSLH) FSLH &kp RSHFT
                         //    |             |            |          |           |           |           |    |             |             |          |       |                 |           |
                         //    ---------------------------------------------------------------------------    ------------------------------------------------------------------------------
-                        //                                          | Numbers   | Space     | Backspace |    | Tab/Ctrl    | Enter/Shift | Symbols  |
-                                                                      &mo NUMBERS &kp SPACE   &kp BSPC         &mt RGUI TAB  &mt RSHFT RET &mo SYMBOLS
+                        //                                          | Numbers   | Space     | Backspace |    | Tab/Cmnd    | Enter/Alt   | Symbols  |
+                                                                      &mo NUMBERS &kp SPACE   &kp BSPC         &mt RGUI TAB  &mt RALT RET  &mo SYMBOLS
                         //                                          |           |           |           |    |             |             |          |
                         //                                          -------------------------------------    ----------------------------------------
                         >;
