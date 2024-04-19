@@ -13,15 +13,15 @@
 #define IMP LA(LS(ENTER))
 // Action = Alt + Enter
 #define ACT LA(ENTER)
-// Back = Alt + Control + <-
-#define BC LA(LC(LEFT))
-// Forward = Alt + Control + ->
-#define FW LA(LC(RIGHT))
+// Back = Alt + Command + <-
+#define BC LA(LG(LEFT))
+// Forward = Alt + Command + ->
+#define FW LA(LG(RIGHT))
 
 
 &caps_word {
         // when using caps word, allow for undescore and minus as they are commonly used for constants in programming languages
-        continue-list = <DELETE BACKSPACE UNDERSCORE LEFT RIGHT LCTRL RCTRL>;
+        continue-list = <DELETE BACKSPACE UNDERSCORE LEFT RIGHT LCTRL RCTRL LGUI RGUI>;
 };
 
 &mt {
@@ -65,12 +65,12 @@
                                 &mt LCTRL ESC &mt RG(A) A &mt RG(S) S &mt LBKT D  &mt LPAR F  &mt LBRC G       &mt RBRC H    &mt RPAR J    &mt RBKT K &kp L   &kp SEMI          &kp SQT
                         //    |             |            |          |           |           |           |    |             |             |          |       |                 |           |
                         //    ---------------------------------------------------------------------------    ------------------------------------------------------------------------------
-                        //    | Shift       | Z/Cmnd Z   | X/Cmnd X | C/Cmnd C  | V/Cmnd V  | B/Cmnd B  |    | N/Super     | M/Ctrl M    | ,        | .     | "/"/Ctrl "/"    | Shift     |
-                                &kp LSHFT     &mt RG(Z) Z &mt RG(X) X &mt RG(C) C &mt RG(V) V &mt RG(B) B      &mt LGUI N    &mt LC(M) M   &kp COMMA  &kp DOT &mt LC(FSLH) FSLH &kp RSHFT
+                        //    | Shift       | Z/Cmnd Z   | X/Cmnd X | C/Cmnd C  | V/Cmnd V  | B/Cmnd B  |    | N/Super     | M/Cmnd M    | ,        | .     | "/"/Cmnd "/"    | Shift     |
+                                &kp LSHFT     &mt RG(Z) Z &mt RG(X) X &mt RG(C) C &mt RG(V) V &mt RG(B) B      &mt LGUI N    &mt LG(M) M   &kp COMMA  &kp DOT &mt LG(FSLH) FSLH &kp RSHFT
                         //    |             |            |          |           |           |           |    |             |             |          |       |                 |           |
                         //    ---------------------------------------------------------------------------    ------------------------------------------------------------------------------
                         //                                          | Numbers   | Space     | Backspace |    | Tab/Ctrl    | Enter/Shift | Symbols  |
-                                                                      &mo NUMBERS &kp SPACE   &kp BSPC         &mt RCTRL TAB &mt RSHFT RET &mo SYMBOLS
+                                                                      &mo NUMBERS &kp SPACE   &kp BSPC         &mt RGUI TAB  &mt RSHFT RET &mo SYMBOLS
                         //                                          |           |           |           |    |             |             |          |
                         //                                          -------------------------------------    ----------------------------------------
                         >;
@@ -88,8 +88,8 @@
                                 &trans &trans &trans &kp GRAVE &kp EQUAL &trans             &trans &kp MINUS &kp UP   &trans    &trans &trans
                         //    |      |      |      |         |         |             |    |      |         |        |         |      |        |
                         //    --------------------------------------------------------    -----------------------------------------------------
-                        //    |      |      |      |         |         | Ctrl Alt B  |    |      | ←       | ↓      | →       |      |        |
-                                &trans &trans &trans &kp LCTRL &kp LALT  &kp LA(LC(B))      &trans &kp LEFT  &kp DOWN &kp RIGHT &trans &trans
+                        //    |      |      |      |         |         | Cmnd Alt B  |    |      | ←       | ↓      | →       |      |        |
+                                &trans &trans &trans &kp LCTRL &kp LALT  &kp LA(LG(B))      &trans &kp LEFT  &kp DOWN &kp RIGHT &trans &trans
                         //    |      |      |      |         |         |             |    |      |         |        |         |      |        |
                         //    --------------------------------------------------------    -----------------------------------------------------
                         //                         |         |         |             |    |      |         |        |
@@ -107,8 +107,8 @@
                                 &trans &kp EXCL &kp AT &kp HASH &kp DLLR &kp PRCNT      &kp CARET &kp AMPS  &kp KP_MULTIPLY &kp LPAR &kp RPAR &trans
                         //    |      |        |      |        |        |         |    |         |         |               |        |        |        |
                         //    ----------------------------------------------------    ----------------------------------------------------------------
-                        //    |      |        |      |        | Super  |         |    |         | Crl A S |               |        |        |        |
-                                &trans &trans   &trans &trans   &kp LGUI &trans         &trans    &mt MEH   &trans          &trans   &trans   &trans
+                        //    |      |        |      | Space  | Super  |         |    |         | Crl A S |               |        |        |        |
+                                &trans &trans  &trans &kp SPACE &kp LGUI &trans         &trans    &mt MEH   &trans          &trans   &trans   &trans
                         //    |      |        |      |        |        |         |    |         |         |               |        |        |        |
                         //    ----------------------------------------------------    ----------------------------------------------------------------
                         //    |      |        |      |        |        |         |    |         |         |               |        |        |        |
