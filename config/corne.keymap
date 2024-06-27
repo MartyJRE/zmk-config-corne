@@ -20,18 +20,18 @@
 
 
 &caps_word {
-        // when using caps word, allow for undescore and minus as they are commonly used for constants in programming languages
-        continue-list = <DELETE BACKSPACE UNDERSCORE LEFT RIGHT LCTRL RCTRL LGUI RGUI>;
+    // when using caps word, allow for undescore and minus as they are commonly used for constants in programming languages
+    continue-list = <DELETE BACKSPACE UNDERSCORE LEFT RIGHT LCTRL RCTRL LGUI RGUI>;
 };
 
 &mt {
-        // sane defaults
-        tapping-term-ms = <300>;
-        flavor = "tap-preferred";
+    // sane defaults
+    tapping-term-ms = <300>;
+    flavor = "tap-preferred";
 };
 
 &soft_off {
-        hold-time-ms = <200>;
+    hold-time-ms = <200>;
 };
 
 // Key index reference:
@@ -45,108 +45,56 @@
 #define RIGHT_MOD 41 // right thumb layer modifier key index
 
 / {
-        conditional_layers {
-                compatible = "zmk,conditional-layers";
-                tri_layer {
-                        // Switch to system layer if both layer switch keys are pressed at the same time
-                        if-layers = <NUMBERS SYMBOLS>;
-                        then-layer = <SYSTEM>;
-                };
+    conditional_layers {
+        compatible = "zmk,conditional-layers,behavior-soft-off";
+        tri_layer {
+            // Switch to system layer if both layer switch keys are pressed at the same time
+            if-layers = <NUMBERS SYMBOLS>;
+            then-layer = <SYSTEM>;
+        };
+    };
+
+    keymap {
+        compatible = "zmk,keymap,behavior-soft-off";
+
+        default_layer {
+            label = "alphas";
+            bindings = <
+                &kp DEL       &kp Q       &mt RG(W) W &kp E       &mt RG(R) R &mt RG(T) T      &mt MEH Y     &kp U     &kp I      &kp O   &kp P         &kp BSLH
+                &mt LCTRL ESC &mt RG(A) A &mt RG(S) S &mt LBKT D  &mt LPAR F  &mt LBRC G       &mt RBRC H    &mt RPAR J    &mt RBKT K &kp L   &kp SEMI      &kp SQT
+                &kp LSHFT     &mt RG(Z) Z &mt RG(X) X &mt RG(C) C &mt RG(V) V &mt RG(B) B      &mt LGUI N    &mt LG(M) M   &kp COMMA  &kp DOT &mt LG(FSLH) FSLH &kp RSHFT
+                                      &mo NUMBERS &kp SPACE   &kp BSPC     &mt RGUI TAB  &mt RALT RET  &mo SYMBOLS
+            >;
         };
 
-        keymap {
-                compatible = "zmk,keymap";
-
-                default_layer {
-                        label = "alphas";
-                        bindings = <
-                        //    ---------------------------------------------------------------------------    -----------------------------------------------------------------------------
-                        //    | Delete      | Q          | W/Cmnd W | E         | R/Cmnd R  | T/Cmnd T  |    | Y/Crl At Sh | U           | I        | O     | P               | \         |
-                                &kp DEL       &kp Q       &mt RG(W) W &kp E       &mt RG(R) R &mt RG(T) T      &mt MEH Y     &kp U         &kp I      &kp O   &kp P             &kp BSLH
-                        //    |             |            |          |           |           |           |    |             |             |          |       |                 |           |
-                        //    ---------------------------------------------------------------------------    -----------------------------------------------------------------------------
-                        //    | Esc/Ctrl    | A/Cmnd A   | S/Cmnd S | D/[       | F/(       | G/{       |    | H/}         | J/)         | K/]      | L     | ;               | '         |
-                                &mt LCTRL ESC &mt RG(A) A &mt RG(S) S &mt LBKT D  &mt LPAR F  &mt LBRC G       &mt RBRC H    &mt RPAR J    &mt RBKT K &kp L   &kp SEMI          &kp SQT
-                        //    |             |            |          |           |           |           |    |             |             |          |       |                 |           |
-                        //    ---------------------------------------------------------------------------    ------------------------------------------------------------------------------
-                        //    | Shift       | Z/Cmnd Z   | X/Cmnd X | C/Cmnd C  | V/Cmnd V  | B/Cmnd B  |    | N/Super     | M/Cmnd M    | ,        | .     | "/"/Cmnd "/"    | Shift     |
-                                &kp LSHFT     &mt RG(Z) Z &mt RG(X) X &mt RG(C) C &mt RG(V) V &mt RG(B) B      &mt LGUI N    &mt LG(M) M   &kp COMMA  &kp DOT &mt LG(FSLH) FSLH &kp RSHFT
-                        //    |             |            |          |           |           |           |    |             |             |          |       |                 |           |
-                        //    ---------------------------------------------------------------------------    ------------------------------------------------------------------------------
-                        //                                          | Numbers   | Space     | Backspace |    | Tab/Cmnd    | Enter/Alt   | Symbols  |
-                                                                      &mo NUMBERS &kp SPACE   &kp BSPC         &mt RGUI TAB  &mt RALT RET  &mo SYMBOLS
-                        //                                          |           |           |           |    |             |             |          |
-                        //                                          -------------------------------------    ----------------------------------------
-                        >;
-                };
-
-                lower_layer {
-                        label = "numbers";
-                        bindings = <
-                        //    --------------------------------------------------------    -----------------------------------------------------
-                        //    |      | 1    | 2    | 3       | 4       | 5           |    | 6    | 7       | 8      | 9       | 0    |        |
-                                &trans &kp N1 &kp N2 &kp N3    &kp N4    &kp N5             &kp N6 &kp N7    &kp N8   &kp N9    &kp N0 &trans
-                        //    |      |      |      |         |         |             |    |      |         |        |         |      |        |
-                        //    --------------------------------------------------------    -----------------------------------------------------
-                        //    |      |      |      | `       | =       |             |    |      | -       | ↑      |         |      |        |
-                                &trans &trans &trans &kp GRAVE &kp EQUAL &trans             &trans &kp MINUS &kp UP   &trans    &trans &trans
-                        //    |      |      |      |         |         |             |    |      |         |        |         |      |        |
-                        //    --------------------------------------------------------    -----------------------------------------------------
-                        //    |      |      |      |         |         | Cmnd Alt B  |    |      | ←       | ↓      | →       |      |        |
-                                &soft_off &trans &trans &kp LCTRL &kp LALT  &kp LA(LG(B))   &trans &kp LEFT  &kp DOWN &kp RIGHT &trans &trans
-                        //    |      |      |      |         |         |             |    |      |         |        |         |      |        |
-                        //    --------------------------------------------------------    -----------------------------------------------------
-                        //                         |         |         |             |    |      |         |        |
-                                                     &trans    &trans    &trans             &trans &trans    &trans
-                        //                         |         |         |             |    |      |         |        |
-                        //                         -----------------------------------    ---------------------------
-                        >;
-                };
-
-                raise_layer {
-                        label = "symbols";
-                        bindings = <
-                        //    ----------------------------------------------------    ----------------------------------------------------------------
-                        //    |      | !      | @    | #      | $      | %       |    | ^       | &       | *             | (      | )      |        |
-                                &trans &kp EXCL &kp AT &kp HASH &kp DLLR &kp PRCNT      &kp CARET &kp AMPS  &kp KP_MULTIPLY &kp LPAR &kp RPAR &trans
-                        //    |      |        |      |        |        |         |    |         |         |               |        |        |        |
-                        //    ----------------------------------------------------    ----------------------------------------------------------------
-                        //    |      |        |      | Space  | Super  |         |    |         | Crl A S |               |        |        |        |
-                                &trans &trans  &trans &kp SPACE &kp LGUI &trans         &trans    &mt MEH   &trans          &trans   &trans   &trans
-                        //    |      |        |      |        |        |         |    |         |         |               |        |        |        |
-                        //    ----------------------------------------------------    ----------------------------------------------------------------
-                        //    |      |        |      |        |        |         |    |         |         |               |        |        |        |
-                                &soft_off &trans   &trans &trans   &trans   &trans         &trans    &trans    &trans          &trans   &trans   &trans
-                        //    |      |        |      |        |        |         |    |         |         |               |        |        |        |
-                        //    ----------------------------------------------------    ----------------------------------------------------------------
-                        //                           |        |        |         |    |         |         |               |
-                                                       &trans   &trans   &trans         &trans    &trans    &trans
-                        //                           |        |        |         |    |         |         |               |
-                        //                           -----------------------------    -------------------------------------
-                        >;
-                };
-
-                tri_layer {
-                        label = "system";
-                        bindings = <
-                        //    ----------------------------------------------------------------------------    -----------------------------------------------------------
-                        //    | Clear BT | Profile 1  | Profile 2  | Profile 3  | Profile 4  | Profile 5 |    |                |       |       |      |      |          |
-                                &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4     &trans          &trans  &trans  &trans &trans  &trans
-                        //    |          |            |            |            |            |           |    |                |       |       |      |      |          |
-                        //    ----------------------------------------------------------------------------    -----------------------------------------------------------
-                        //    |          |            |            |            | Alt        |Back       |    | Forth          | Tab   |       |      |      |          |
-                                &trans     &trans       &trans       &trans       &kp LGUI    &kp BC           &kp FW           &kp TAB &trans &kp ACT &kp IMP &trans
-                        //    |          |            |            |            |            |           |    |                |       |       |      |      |          |
-                        //    ----------------------------------------------------------------------------    -----------------------------------------------------------
-                        //    |          |            |            | Caps Word  |            |           |    |                |       |       |      |      |          |
-                                &soft_off  &trans       &trans       &caps_word   &trans       &trans           &trans          &trans  &trans  &trans &trans  &trans
-                        //    |          |            |            |            |            |           |    |                |       |       |      |      |          |
-                        //    ----------------------------------------------------------------------------    -----------------------------------------------------------
-                        //                                         |            |            |           |    |                |       |       |
-                                                                     &trans       &trans       &trans           &trans          &trans  &trans
-                        //                                         |            |            |           |    |                |       |       |
-                        //                                         ---------------------------------------    ----------------------------------
-                        >;
-                };
+        lower_layer {
+            label = "numbers";
+            bindings = <
+                &trans &kp N1 &kp N2 &kp N3    &kp N4    &kp N5         &kp N6 &kp N7    &kp N8   &kp N9    &kp N0 &trans
+                &trans &trans &trans &kp GRAVE &kp EQUAL &trans         &trans &kp MINUS &kp UP   &trans    &trans &trans
+                &trans &trans &trans &kp LCTRL &kp LALT  &kp LA(LG(B))   &trans &kp LEFT  &kp DOWN &kp RIGHT &trans &trans
+                             &trans    &trans    &trans         &trans &trans    &trans
+            >;
         };
+
+        raise_layer {
+            label = "symbols";
+            bindings = <
+                &trans &kp EXCL &kp AT &kp HASH &kp DLLR &kp PRCNT      &kp CARET &kp AMPS  &kp KP_MULTIPLY &kp LPAR &kp RPAR &trans
+                &trans &trans  &trans &kp SPACE &kp LGUI &trans     &trans    &mt MEH   &trans      &trans   &trans   &trans
+                &trans &trans   &trans &trans   &trans   &trans     &trans    &trans    &trans      &trans   &trans   &trans
+                               &trans   &trans   &trans     &trans    &trans    &trans
+            >;
+        };
+
+        tri_layer {
+            label = "system";
+            bindings = <
+                &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4     &soft_off      &trans  &trans  &trans &trans  &trans
+                &trans     &trans       &trans       &trans       &kp LGUI    &kp BC       &kp FW       &kp TAB &trans &kp ACT &kp IMP &trans
+                &trans  &trans       &trans       &caps_word   &trans       &trans       &trans      &trans  &trans  &trans &trans  &trans
+                                     &trans       &trans       &trans       &trans      &trans  &trans
+            >;
+        };
+    };
 };
