@@ -46,7 +46,7 @@
 
 / {
     conditional_layers {
-        compatible = "zmk,conditional-layers,behavior-soft-off";
+        compatible = "zmk,conditional-layers";
         tri_layer {
             // Switch to system layer if both layer switch keys are pressed at the same time
             if-layers = <NUMBERS SYMBOLS>;
@@ -55,7 +55,7 @@
     };
 
     keymap {
-        compatible = "zmk,keymap,behavior-soft-off";
+        compatible = "zmk,keymap";
 
         default_layer {
             label = "alphas";
