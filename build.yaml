@@ -13,7 +13,7 @@
 #
 ---
 include:
-  - board: rp2040
+  - board: puchi_ble_v1
     shield: corne_left
-  - board: rp2040
+  - board: puchi_ble_v1
     shield: corne_right
